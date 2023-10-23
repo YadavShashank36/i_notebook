@@ -11,7 +11,7 @@ router.get("/fetchalluser", fetchuser, async (req, res) => {
     const notes = await Note.find({ user: req.user.id });
     res.json(notes);
   } catch (error) {
-    console.error(error.message);
+    console.log(error.message);
     res.status(500).send("some error");
   }
 });
