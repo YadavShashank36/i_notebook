@@ -6,7 +6,7 @@ const User = require("../models/User");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
 //1 get all the notes
-router.get("/fetchalluser", fetchuser, async (req, res) => {
+router.get("/fetchallnotes", fetchuser, async (req, res) => {
   try {
     const notes = await Note.find({ user: req.user.id });
     res.json(notes);
@@ -39,7 +39,7 @@ router.post(
         user: req.user.id,
       });
       const savedNote = await note.save();
-      res.json(user.name);
+      res.json(req.user);
     } catch (error) {
       console.error(error.message);
       res.status(500).send("some error");
@@ -67,7 +67,7 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
    res.json({note});
    
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).send("some error");
   }
 });
